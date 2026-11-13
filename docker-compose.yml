@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  crowdchain:
+    build: .
+    ports:
+      - "4023:4023"
+    environment:
+      - NODE_ENV=production
+      - PORT=4023
+      - RPC_URL=https://ethereum-sepolia.publicnode.com
+    volumes:
+      - crowdchain_data:/app/backend/data
+    restart: unless-stopped
+
+volumes:
+  crowdchain_data:

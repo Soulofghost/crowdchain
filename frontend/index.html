@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CrowdChain | Milestone-Based Web3 Crowdfunding</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-layout">
+    <header class="navbar">
+      <div class="nav-brand">
+        <div class="brand-hex">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </div>
+        <div>
+          <h2>CrowdChain</h2>
+          <span class="tagline">TRUSTLESS MILESTONE PROTOCOL</span>
+        </div>
+      </div>
+
+      <div class="nav-stats">
+        <div class="stat-pill">
+          <span class="stat-label">TOTAL VOLUME</span>
+          <span class="stat-val" id="totalVolume">46.70 ETH</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-label">DISBURSED</span>
+          <span class="stat-val text-emerald" id="disbursedVolume">18.50 ETH</span>
+        </div>
+        <button class="btn btn-primary" id="openCreateModal">+ Launch Project</button>
+      </div>
+    </header>
+
+    <main class="main-container">
+      <div class="filter-bar">
+        <div class="filter-tabs">
+          <button class="filter-tab active" data-status="ALL">All Campaigns</button>
+          <button class="filter-tab" data-status="ACTIVE">Live & Active</button>
+          <button class="filter-tab" data-status="SUCCESSFUL">Funded (Voting)</button>
+          <button class="filter-tab" data-status="FAILED">Refundable</button>
+        </div>
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Search projects or protocols...">
+        </div>
+      </div>
+
+      <div class="campaigns-grid" id="campaignsGrid">
+        <div class="loading-state">Loading smart contract campaigns...</div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal: Launch Campaign -->
+  <div class="modal-overlay" id="createModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Launch Trustless Campaign</h3>
+        <button class="btn-close" id="closeCreateBtn">&times;</button>
+      </div>
+      <form id="createCampaignForm">
+        <div class="field">
+          <label>Campaign Title *</label>
+          <input type="text" id="cmpTitle" required placeholder="e.g. Decentralized Storage Layer">
+        </div>
+        <div class="field">
+          <label>Category *</label>
+          <select id="cmpCategory">
+            <option value="Hardware & IoT">Hardware & IoT</option>
+            <option value="Cryptography & Web3">Cryptography & Web3</option>
+            <option value="Infrastructure">Infrastructure</option>
+            <option value="DeepTech">DeepTech</option>
+          </select>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Funding Goal (ETH) *</label>
+            <input type="number" id="cmpGoal" required step="0.1" min="0.1" placeholder="e.g. 25.0">
+          </div>
+          <div class="field">
+            <label>Duration (Days) *</label>
+            <input type="number" id="cmpDuration" required min="1" max="90" value="30">
+          </div>
+        </div>
+        <div class="field">
+          <label>Project Description *</label>
+          <textarea id="cmpDesc" rows="3" required placeholder="Detailed objective, deliverables, and architecture milestones..."></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="cancelCreateBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Deploy Campaign</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Campaign Detail & Milestone Governance -->
+  <div class="modal-overlay" id="detailModal">
+    <div class="modal-card modal-lg">
+      <div class="modal-header">
+        <h3 id="modalCampaignTitle">Project Details</h3>
+        <button class="btn-close" id="closeDetailBtn">&times;</button>
+      </div>
+      <div class="detail-body" id="detailModalContent">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
