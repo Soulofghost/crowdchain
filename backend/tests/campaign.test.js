@@ -6,11 +6,11 @@ import { crowdChainManager } from '../src/engine/crowdchain.js';
 describe('CrowdChain Smart Contract Crowdfunding Engine Tests', () => {
   before(() => {
     initDb();
-    // Clean up test campaigns if re-running
-    db.exec("DELETE FROM milestone_votes WHERE milestone_id LIKE 'm-test-%'");
-    db.exec("DELETE FROM milestones WHERE id LIKE 'm-test-%'");
-    db.exec("DELETE FROM pledges WHERE backer = '0xtestbacker1' OR backer = '0xtestbacker2'");
-    db.exec("DELETE FROM campaigns WHERE title LIKE 'Test Quantum AI Engine%' OR title LIKE 'Test Expired Campaign%'");
+    // Clean up test campaigns and votes if re-running
+    db.exec("DELETE FROM milestone_votes;");
+    db.exec("DELETE FROM milestones WHERE campaign_id > 3;");
+    db.exec("DELETE FROM pledges WHERE campaign_id > 3 OR backer LIKE '0xtestbacker%';");
+    db.exec("DELETE FROM campaigns WHERE id > 3;");
   });
 
   const creator = '0x1111222233334444555566667777888899990000';
